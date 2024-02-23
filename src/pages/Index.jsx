@@ -8,8 +8,22 @@ const transactionsData = [
 
 const categories = ["Salary", "Food", "Entertainment", "Transport", "Health", "Other"];
 
+import { Input } from "@chakra-ui/react";
+
 const Index = () => {
   const [transactions, setTransactions] = useState(transactionsData);
+
+  // Function to handle description change
+  const handleDescriptionChange = (index, newDescription) => {
+    const updatedTransactions = transactions.map((transaction, i) => (i === index ? { ...transaction, description: newDescription } : transaction));
+    setTransactions(updatedTransactions);
+  };
+
+  // Function to handle amount change
+  const handleAmountChange = (index, newAmount) => {
+    const updatedTransactions = transactions.map((transaction, i) => (i === index ? { ...transaction, amount: newAmount } : transaction));
+    setTransactions(updatedTransactions);
+  };
 
   // Function to add a new transaction
   const addTransaction = () => {
@@ -74,8 +88,12 @@ const Index = () => {
               {transactions.map((transaction, index) => (
                 <Tr key={index}>
                   <Td>{transaction.date}</Td>
-                  <Td>{transaction.description}</Td>
-                  <Td isNumeric>{transaction.amount}</Td>
+                  <Td>
+                    <Input value={transaction.description} onChange={(e) => handleDescriptionChange(index, e.target.value)} />
+                  </Td>
+                  <Td isNumeric>
+                    <Input type="number" value={transaction.amount} onChange={(e) => handleAmountChange(index, e.target.value)} />
+                  </Td>
                   <Td>
                     <Select placeholder="Select category" value={transaction.category} onChange={(e) => handleCategoryChange(index, e.target.value)}>
                       {categories.map((category) => (
