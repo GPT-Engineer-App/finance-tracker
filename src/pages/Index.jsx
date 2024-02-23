@@ -11,10 +11,20 @@ const categories = ["Salary", "Food", "Entertainment", "Transport", "Health", "O
 const Index = () => {
   const [transactions, setTransactions] = useState(transactionsData);
 
+  // Function to add a new transaction
+  const addTransaction = () => {
+    const newTransaction = {
+      date: "2024-02-23",
+      description: "New Transaction",
+      amount: 0,
+      category: "Other",
+    };
+    setTransactions([...transactions, newTransaction]);
+  };
+
   // Function to handle category change
   const handleCategoryChange = (index, newCategory) => {
-    const updatedTransactions = [...transactions];
-    updatedTransactions[index].category = newCategory;
+    const updatedTransactions = transactions.map((transaction, i) => (i === index ? { ...transaction, category: newCategory } : transaction));
     setTransactions(updatedTransactions);
   };
 
@@ -29,7 +39,7 @@ const Index = () => {
               <Button leftIcon={<FaUpload />} variant="outline">
                 Import
               </Button>
-              <Button leftIcon={<FaPlus />} variant="solid">
+              <Button leftIcon={<FaPlus />} variant="solid" onClick={() => addTransaction()}>
                 Add Transaction
               </Button>
             </HStack>
