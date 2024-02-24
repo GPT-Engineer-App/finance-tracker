@@ -13,6 +13,18 @@ import GoogleMapsSpain from "../components/GoogleMapsSpain";
 
 const Index = () => {
   const [transactions, setTransactions] = useState(transactionsData);
+  const [addressSearch, setAddressSearch] = useState("");
+
+  // Function to handle search input changes
+  const handleSearchChange = (event) => {
+    setAddressSearch(event.target.value);
+  };
+
+  // Function to handle search submission
+  const handleSearchSubmit = () => {
+    // Intentionally empty due to constraints.
+    // Ideally, this would geocode the address to a location and update the map.
+  };
 
   // Function to handle description change
   const handleDescriptionChange = (index, newDescription) => {
@@ -71,8 +83,20 @@ const Index = () => {
         </Text>
       </Flex>
       import GoogleMapsSpain from '../components/GoogleMapsSpain';
-      {/* Google Maps Section */}
-      <GoogleMapsSpain />
+      {/* Search and Google Maps Section */}
+      <Box p={4}>
+        <Input
+          placeholder="Search for an address"
+          value={addressSearch}
+          onChange={handleSearchChange}
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              handleSearchSubmit();
+            }
+          }}
+        />
+      </Box>
+      <GoogleMapsSpain address={addressSearch} />
       {/* Main Content */}
       <Container maxW="container.xl" py={6}>
         <Box overflowX="auto">
