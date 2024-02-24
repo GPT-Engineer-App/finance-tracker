@@ -9,6 +9,7 @@ const transactionsData = [
 const categories = ["Salary", "Food", "Entertainment", "Transport", "Health", "Other"];
 
 import { Input } from "@chakra-ui/react";
+import GoogleMapsSpain from "../components/GoogleMapsSpain";
 
 const Index = () => {
   const [transactions, setTransactions] = useState(transactionsData);
@@ -60,7 +61,6 @@ const Index = () => {
           </Flex>
         </Container>
       </Box>
-
       {/* Hero Section */}
       <Flex bg="gray.100" p={10} justify="center" align="center" direction="column">
         <Heading as="h2" size="lg" mb={4}>
@@ -70,7 +70,9 @@ const Index = () => {
           Import and manage your transactions from all your bank accounts in one place. Categorize them and gain insights to make better financial decisions.
         </Text>
       </Flex>
-
+      import GoogleMapsSpain from '../components/GoogleMapsSpain';
+      {/* Google Maps Section */}
+      <GoogleMapsSpain />
       {/* Main Content */}
       <Container maxW="container.xl" py={6}>
         <Box overflowX="auto">
@@ -112,7 +114,6 @@ const Index = () => {
           </Table>
         </Box>
       </Container>
-
       {/* Footer */}
       <Box bg="blue.500" color="white" py={4}>
         <Container maxW="container.xl" textAlign="center">
